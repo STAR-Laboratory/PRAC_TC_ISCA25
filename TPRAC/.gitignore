@@ -1,0 +1,8 @@
+results/
+traces
+sim_scripts/run_scripts
+run.sh
+
+**/__pycache__/
+*.pyc
+.vscode/
