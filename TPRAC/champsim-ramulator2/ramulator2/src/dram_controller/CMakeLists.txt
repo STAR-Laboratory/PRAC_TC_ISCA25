@@ -38,7 +38,6 @@ target_sources(
   impl/plugin/aqua.cpp
   impl/plugin/bat_based_rfm.cpp
   impl/plugin/timing_based_rfm.cpp
-  impl/plugin/tprac_p.cpp
 
   impl/plugin/blockhammer/blockhammer_throttler.h
   impl/plugin/blockhammer/blockhammer_util.h
@@ -53,7 +52,6 @@ target_sources(
 
   impl/plugin/prac/prac.cpp
   impl/plugin/prac/qprac.cpp
-  impl/plugin/prac/moat.cpp
   impl/plugin/prac/prac.h
 )
 
