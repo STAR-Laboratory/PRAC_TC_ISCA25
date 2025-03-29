@@ -1,3 +1,13 @@
 #!/bin/bash
-export LD_LIBRARY_PATH=/scratch/st-prashnr-1/jeonghyun/champsim-ramulator2/ramulator2:$LD_LIBRARY_PATH
-echo $LD_LIBRARY_PATH
+
+echo "---------------------------"
+echo ""
+echo "#######################################################"
+echo "[INFO] Setup Ramulator2 Library Path for ChampSim"
+echo "#######################################################"
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+RAMULATOR_DIR="$SCRIPT_DIR/../ramulator2"
+
+export LD_LIBRARY_PATH="$RAMULATOR_DIR:$LD_LIBRARY_PATH"
+echo "$LD_LIBRARY_PATH"

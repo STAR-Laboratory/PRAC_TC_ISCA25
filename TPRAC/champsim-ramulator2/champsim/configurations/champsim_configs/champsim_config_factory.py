@@ -48,22 +48,28 @@ if __name__ == "__main__":
     num_sets = SetLLCSetSize(per_core_llc_size, num_cores, num_ways)
 
     ## 2. Set Ramulator2 Configuration directory
-    ramulator2_config_dir = '/scratch/st-prashnr-1/jeonghyun/champsim-ramulator2/champsim/configurations/ramulator2_configs/TPRAC_ISCA2025'
-    
+    current_script_path = os.path.abspath(__file__)
+    current_script_dir = os.path.dirname(current_script_path)
+    ramulator2_config_dir = os.path.join(current_script_dir, "../ramulator2_configs/TPRAC_ISCA2025")
+    ramulator2_config_dir = os.path.abspath(ramulator2_config_dir)
+
+    # Sanity check to make sure the path is valid
+    if not os.path.isdir(ramulator2_config_dir):
+        raise FileNotFoundError(f"Expected directory not found: {ramulator2_config_dir}")
     # Baseline DRAM Module info. Prefix of ramulator2 config names
     dram_info = '1CH_4RA_DDR5_32Gb_8000'
     # dram_info = '2CH_4RA_DDR5_32Gb_8000'
 
 
     ## 3. Set michoarchitecutre components
-    # prefetcher = "spp_dev" ## Available: no, next_line, ip_stride, spp_dev, va_ampm_lite
-    prefetcher = ['no', 'next_line', 'spp_dev', 'va_ampm_lite']
-    # branch_predictor = "hashed_perceptron"  ## Available: bimodal, gshare, hashed_perceptron, perceptron
-    branch_predictor = ['bimodal', 'gshare', 'hashed_perceptron', 'perceptron']
+    prefetcher = ["spp_dev"] ## Available: no, next_line, ip_stride, spp_dev, va_ampm_lite
+    # prefetcher = ['no', 'next_line', 'spp_dev', 'va_ampm_lite']
+    branch_predictor = ["hashed_perceptron"]  ## Available: bimodal, gshare, hashed_perceptron, perceptron
+    # branch_predictor = ['bimodal', 'gshare', 'hashed_perceptron', 'perceptron']
     llc_replacement = "srrip" ## Availbe: lru, random, srrip, drrip, ship
 
     ## 4. Set baseline champsim binary name -> Foramt: champsim-bp-pref-repl-memory
-    champsim_bin_dir = f"{num_cores}cores-1CH-4RA-Updated"
+    champsim_bin_dir = f"{num_cores}cores-1CH-4RA"
     # champsim_bin_dir = f"{num_cores}cores-2CH-4RA"
 
     ## 5. Set required parameters: Ex) RowHammer thresholds, mitigation lists

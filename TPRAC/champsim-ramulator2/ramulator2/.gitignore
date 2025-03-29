@@ -13,7 +13,6 @@ TPRAC_ISCA2025/
 perf_attack_traces/traces/
 script/sim_scripts/**/*.pyc
 **/__pycache__
-**/*log*
 
 *results*
 *build*
