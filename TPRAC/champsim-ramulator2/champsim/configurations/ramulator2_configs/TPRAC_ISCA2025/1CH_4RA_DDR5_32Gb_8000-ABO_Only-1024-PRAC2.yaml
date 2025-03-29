@@ -1,0 +1,56 @@
+Frontend:
+  clock_ratio: 1
+  impl: ChampSim
+MemorySystem:
+  AddrMapper:
+    impl: MOP4CLXOR
+  BHDRAMController:
+    BHScheduler:
+      impl: PRACScheduler
+    RefreshManager:
+      impl: AllBank
+    RowPolicy:
+      cap: 4
+      impl: ClosedRowPolicy
+    impl: PRACOPTDRAMController
+    plugins:
+    - ControllerPlugin:
+        commands_to_count:
+        - ACT
+        - PRE
+        - RD
+        - WR
+        - RDA
+        - WRA
+        - REFab
+        - RFMab
+        - RFMsb
+        impl: CommandCounter
+        path: ./401.bzip2.cmd.count
+    - ControllerPlugin:
+        abo_act_ns: 180
+        abo_delay_acts: 2
+        abo_recovery_refs: 2
+        abo_threshold: 995
+        enable_opportunistic_mitigation: true
+        impl: QPRAC
+        psq_size: 5
+        targeted_ref_frequency: 0
+  DRAM:
+    PRAC: true
+    RFM:
+      BRC: 2
+    current:
+      preset: DDR5_Base
+    drampower_enable: true
+    impl: DDR5-PRAC
+    org:
+      channel: 1
+      preset: DDR5_32Gb_x8
+      rank: 4
+    timing:
+      preset: DDR5_8000B
+    voltage:
+      preset: Default
+  clock_ratio: 1
+  impl: BHDRAMSystem
