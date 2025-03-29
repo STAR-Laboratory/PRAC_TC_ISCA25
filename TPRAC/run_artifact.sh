@@ -53,12 +53,12 @@ if [[ -z "$ARTIFACT" ]]; then
 fi
 
 ##### 1. Run prerequiste: Install dependencies, download traces, build frameworks
-echo "----------------------------------"
-echo ""
-echo "##################################"
-echo "[INFO] Start Prerequiste Steps"
-echo "##################################"
-bash "$PWD/run_prerequisite.sh"
+# echo "----------------------------------"
+# echo ""
+# echo "##################################"
+# echo "[INFO] Start Prerequiste Steps"
+# echo "##################################"
+# bash "$PWD/run_prerequisite.sh"
 
 ##### 2. Run Evaluation
 echo "----------------------------------"
@@ -78,14 +78,14 @@ if [[ "$METHOD" == "slurm" ]]; then
     echo "[INFO] Running experiments with SLURM"
     if [[ "$ARTIFACT" == "all" ]]; then
         echo "[INFO] Running all required experiments"
-        SLURM_PART_NAME="$SLURM_PART_NAME" SLURM_PART_DEF_MEM="$SLURM_PART_DEF_MEM" bash "$PWD/run_slurm_9.sh"
-        SLURM_PART_NAME="$SLURM_PART_NAME" SLURM_PART_DEF_MEM="$SLURM_PART_DEF_MEM" bash "$PWD/run_slurm_10.sh"
-        SLURM_PART_NAME="$SLURM_PART_NAME" SLURM_PART_DEF_MEM="$SLURM_PART_DEF_MEM" bash "$PWD/run_slurm_11.sh"
-        SLURM_PART_NAME="$SLURM_PART_NAME" SLURM_PART_DEF_MEM="$SLURM_PART_DEF_MEM" bash "$PWD/run_slurm_12.sh"
+        SLURM_PART_NAME="$SLURM_PART_NAME" SLURM_PART_DEF_MEM="$SLURM_PART_DEF_MEM" bash "$PWD/run_slurm_fig9.sh"
+        SLURM_PART_NAME="$SLURM_PART_NAME" SLURM_PART_DEF_MEM="$SLURM_PART_DEF_MEM" bash "$PWD/run_slurm_fig10.sh"
+        SLURM_PART_NAME="$SLURM_PART_NAME" SLURM_PART_DEF_MEM="$SLURM_PART_DEF_MEM" bash "$PWD/run_slurm_fig11.sh"
+        SLURM_PART_NAME="$SLURM_PART_NAME" SLURM_PART_DEF_MEM="$SLURM_PART_DEF_MEM" bash "$PWD/run_slurm_fig12.sh"
       
     elif [[ "$ARTIFACT" == "main" ]]; then
         echo "[INFO] Running main performance experiment only (Figure 9)"
-        SLURM_PART_NAME="$SLURM_PART_NAME" SLURM_PART_DEF_MEM="$SLURM_PART_DEF_MEM" bash "$PWD/run_slurm_9.sh"
+        SLURM_PART_NAME="$SLURM_PART_NAME" SLURM_PART_DEF_MEM="$SLURM_PART_DEF_MEM" bash "$PWD/run_slurm_fig9.sh"
     else
         echo "[ERROR] Invalid artifact choice: $ARTIFACT"
         usage
