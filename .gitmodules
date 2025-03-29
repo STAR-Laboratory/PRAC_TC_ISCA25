@@ -1,6 +1,3 @@
 [submodule "TPRAC/champsim-ramulator2/champsim/vcpkg"]
 	path = TPRAC/champsim-ramulator2/champsim/vcpkg
 	url = https://github.com/microsoft/vcpkg.git
-[submodule "TPRAC/champsim-ramulator2/champsim/champsim/vcpkg"]
-	path = TPRAC/champsim-ramulator2/champsim/champsim/vcpkg
-	url = https://github.com/microsoft/vcpkg.git
