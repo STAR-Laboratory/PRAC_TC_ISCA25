@@ -1,0 +1,26 @@
+---
+Language: Cpp
+BasedOnStyle: LLVM
+Standard: c++17
+ColumnLimit: 160
+AlignEscapedNewlines: Left
+AllowShortLambdasOnASingleLine: Inline
+AlwaysBreakTemplateDeclarations: Yes
+BreakBeforeBinaryOperators: NonAssignment
+BreakBeforeBraces: Linux
+BreakConstructorInitializers: BeforeColon
+Cpp11BracedListStyle: true
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: '<[[:alnum:]_.]+>'
+    Priority: 1
+    SortPriority: 1
+  - Regex: '<[[:alnum:]_/.]+>'
+    Priority: 1
+    SortPriority: 2
+  - Regex: '.*'
+    Priority: 3
+PointerAlignment: Left
+SortIncludes: true
+...
+

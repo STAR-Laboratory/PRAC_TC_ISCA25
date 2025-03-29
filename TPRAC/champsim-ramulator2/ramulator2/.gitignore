@@ -1,0 +1,55 @@
+build/
+build_timing_based_rfm/
+.vscode
+ext/
+ramulator2
+*.so
+autobuild.sh
+cputraces
+prac_study/
+script/sim_scripts/**/run_scripts
+script/sim_scripts/**/run_SC_scripts
+TPRAC_ISCA2025/
+perf_attack_traces/traces/
+script/sim_scripts/**/*.pyc
+**/__pycache__
+**/*log*
+
+*results*
+*build*
+
+!build.sh
+
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app

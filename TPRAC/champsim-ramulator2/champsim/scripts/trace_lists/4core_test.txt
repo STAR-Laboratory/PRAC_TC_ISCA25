@@ -1,0 +1,9 @@
+cassandra_phase4_core0.trace.xz,cassandra_phase4_core1.trace.xz,cassandra_phase4_core2.trace.xz,cassandra_phase4_core3.trace.xz
+cassandra_phase5_core0.trace.xz,cassandra_phase5_core1.trace.xz,cassandra_phase5_core2.trace.xz,cassandra_phase5_core3.trace.xz
+classification_phase4_core0.trace.xz,classification_phase4_core1.trace.xz,classification_phase4_core2.trace.xz,classification_phase4_core3.trace.xz
+classification_phase5_core0.trace.xz,classification_phase5_core1.trace.xz,classification_phase5_core2.trace.xz,classification_phase5_core3.trace.xz
+cloud9_phase3_core0.trace.xz,cloud9_phase3_core1.trace.xz,cloud9_phase3_core2.trace.xz,cloud9_phase3_core3.trace.xz
+cloud9_phase4_core0.trace.xz,cloud9_phase4_core1.trace.xz,cloud9_phase4_core2.trace.xz,cloud9_phase4_core3.trace.xz
+cloud9_phase5_core0.trace.xz,cloud9_phase5_core1.trace.xz,cloud9_phase5_core2.trace.xz,cloud9_phase5_core3.trace.xz
+nutch_phase3_core0.trace.xz,nutch_phase3_core1.trace.xz,nutch_phase3_core2.trace.xz,nutch_phase3_core3.trace.xz
+nutch_phase4_core0.trace.xz,nutch_phase4_core1.trace.xz,nutch_phase4_core2.trace.xz,nutch_phase4_core3.trace.xz

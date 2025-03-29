@@ -1,0 +1,59 @@
+Frontend:
+  impl: BHO3
+  clock_ratio: 8
+  num_expected_insts: 3000
+  llc_capacity_per_core: 2MB
+  llc_num_mshr_per_core: 16
+  inst_window_depth: 352
+  traces: 
+    - example_inst.trace
+
+  Translation:
+    impl: RandomTranslation 
+    max_addr: 17179869184
+
+MemorySystem:
+  impl: BHDRAMSystem
+  clock_ratio: 4
+
+  DRAM:
+    impl: DDR5-PRAC
+    org:
+      preset: DDR5_32Gb_x8
+      channel: 1
+      rank: 2
+    timing:
+      preset: DDR5_6400B 
+    RFM:
+      BRC: 2
+    PRAC: True
+
+  BHDRAMController:
+    impl: OPTDRAMController
+    BHScheduler:
+      impl: BHScheduler
+    RefreshManager:
+      impl: AllBank
+    RowPolicy:
+      impl: ClosedRowPolicy
+      cap: 4
+    plugins:
+    - ControllerPlugin:
+        rfm_type: 0
+        TB_RFM_window: 6278
+        debug: True
+        impl: TimingBasedRFM
+    - ControllerPlugin:
+        commands_to_count:
+        - ACT
+        - PRE
+        - RD
+        - WR
+        - RDA
+        - WRA
+        - REFab
+        - RFMab
+        - RFMsb
+        impl: CommandCounter
+  AddrMapper:
+    impl: MOP4CLXOR
