@@ -1,4 +1,6 @@
 results/
+!results/sample_results/
+
 traces
 sim_scripts/run_scripts
 run.sh

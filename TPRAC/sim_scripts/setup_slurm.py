@@ -65,13 +65,13 @@ for trace_group in trace_groups:
     trace_names = trace_names.split(".champsimtrace.xz")[0]  # Remove ".champsimtrace.xz"
     trace_names = trace_names.split("_core0")[0]  # Remove any "_core0" suffix
 
-high_memory_intensive_workloads = ['410.bwaves_1963B', '429.mcf_22B', '433.milc_274B', '437.leslie3d_134B',
+high_memory_intensive_workloads = ['410.bwaves_1963B', '429.mcf_22B', '437.leslie3d_134B',
                                    '450.soplex_247B', '462.libquantum_714B', '470.lbm_1274B', '471.omnetpp_188B',
                                     '605.mcf_s_1152B', '619.lbm_s_2676B', '620.omnetpp_s_141B', '649.fotonik3d_s_10881B', '654.roms_s_1007B',
                                     'nutch', 'cloud9','cassandra','classification']
 
 
-# test_workloads = []
+# target_workloads = []
 
 def get_multicore_run_commands():
     run_commands = []
@@ -119,8 +119,9 @@ def get_multicore_run_commands():
             # Join all traces in the trace group dynamically
             full_traces = " ".join(f"{TRACE_DIR}/{trace}" for trace in trace_group)
 
-            # if test_workloads:
-            #     if trace_names not in test_workloads:
+            ###Enable here if you want to run workloads in taget_workloads list
+            # if target_workloads:
+            #     if trace_names not in target_workloads:
             #         continue
 
             if trace_names in high_memory_intensive_workloads:
