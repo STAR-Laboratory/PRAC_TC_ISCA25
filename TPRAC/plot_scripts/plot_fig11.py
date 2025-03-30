@@ -38,6 +38,8 @@ df_melted['Mitigations'] = df_melted['Mitigations'].replace(rename_mapping)
 # Calculate performance overhead
 df_melted['Performance_Overhead'] = (1 - df_melted['WS'])*100
 
+sns.set_palette('tab10')
+sns.set_style("whitegrid")
 # Set up the plot
 fig, ax = plt.subplots(figsize=(8, 2))
 plt.rc('font', size=12)
@@ -95,6 +97,7 @@ ax.set_yticks([0.6, 0.7, 0.8, 0.9, 1])
 ellipse = patches.Ellipse((-0.57, 0.6), width=0.23, height=0.06, edgecolor='red', fill=False, clip_on=False, facecolor='none', linewidth=1.5)
 ax.add_patch(ellipse)
 
+plt.grid(True, linestyle=':')
 plots_dir = '../results/plots'
 os.makedirs(plots_dir, exist_ok=True)
 fig.savefig(os.path.join(plots_dir, 'Figure11.pdf'), dpi=600, bbox_inches='tight')
