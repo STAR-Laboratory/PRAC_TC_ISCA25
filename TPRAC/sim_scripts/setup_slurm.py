@@ -67,7 +67,7 @@ for trace_group in trace_groups:
 
 high_memory_intensive_workloads = ['410.bwaves_1963B', '429.mcf_22B', '437.leslie3d_134B',
                                    '450.soplex_247B', '462.libquantum_714B', '470.lbm_1274B', '471.omnetpp_188B',
-                                    '605.mcf_s_1152B', '619.lbm_s_2676B', '620.omnetpp_s_141B', '649.fotonik3d_s_10881B', '654.roms_s_1007B',
+                                    '605.mcf_s_1152B', '619.lbm_s_2676B', '620.omnetpp_s_141B','654.roms_s_1007B',
                                     'nutch', 'cloud9','cassandra','classification']
 
 
@@ -120,9 +120,9 @@ def get_multicore_run_commands():
             full_traces = " ".join(f"{TRACE_DIR}/{trace}" for trace in trace_group)
 
             ###Enable here if you want to run workloads in taget_workloads list
-            # if target_workloads:
-            #     if trace_names not in target_workloads:
-            #         continue
+            if target_workloads:
+                if trace_names not in target_workloads:
+                    continue
 
             if trace_names in high_memory_intensive_workloads:
                 NUM_EXPECTED_INSTS = run_config.NUM_EXPECTED_INSTS_HIGH
