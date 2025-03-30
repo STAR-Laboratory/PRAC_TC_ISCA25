@@ -10,11 +10,11 @@ plt.rcParams['pdf.fonttype'] = 42  # TrueType fonts for PDFs
 plt.rcParams['ps.fonttype'] = 42  # TrueType fonts for PS files
 
 df=pd.read_csv('../results/csvs/results_fig7.csv')
+
+sns.set_style("whitegrid")
 # Set up the plot
 fig, ax = plt.subplots(figsize=(7, 2))
 plt.rc('font', size=12)
-# Use Seaborn's 'tab10' color palette
-sns.set_style("whitegrid")
 palette = sns.color_palette("tab10")
 
 colors = {impl: palette[i % len(palette)] for i, impl in enumerate(df['Chip'].unique())}
