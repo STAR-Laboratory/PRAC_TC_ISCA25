@@ -53,12 +53,12 @@ if [[ -z "$ARTIFACT" ]]; then
 fi
 
 ##### 1. Run prerequiste: Install dependencies, download traces, build frameworks
-# echo "----------------------------------"
-# echo ""
-# echo "##################################"
-# echo "[INFO] Start Prerequiste Steps"
-# echo "##################################"
-# bash "$PWD/run_prerequisite.sh"
+echo "----------------------------------"
+echo ""
+echo "##################################"
+echo "[INFO] Start Prerequiste Steps"
+echo "##################################"
+bash "$PWD/run_prerequisite.sh"
 
 ##### 2. Run Evaluation
 echo "----------------------------------"
@@ -95,6 +95,7 @@ elif [[ "$METHOD" == "personal" ]]; then
     echo "[INFO] Running experiments on personal server"
     if [[ "$ARTIFACT" == "all" ]]; then
         echo "[INFO] We highly recommend running the main performance experiment and reviewing the results first before proceeding with all experiments if using a personal server. Running all experiments on a personal server with limited resources (e.g., < 256GB DRAM and < 40 cores) can take a significant amount of time, potentially taking up to a week."
+        echo "[INFO] Running Experiments for Figure 9"
         bash "$PWD/run_ps_fig9.sh"
         bash "$PWD/run_ps_except_main_experiment.sh"
     elif [[ "$ARTIFACT" == "main" ]]; then
@@ -104,7 +105,6 @@ elif [[ "$METHOD" == "personal" ]]; then
         echo "[ERROR] Invalid artifact choice: $ARTIFACT"
         usage
     fi
-
 else
     echo "[ERROR] Invalid method: $METHOD"
     usage
