@@ -1,8 +1,8 @@
 #!/bin/bash
 echo ""
-echo "###############################"
+echo "######################################################################################"
 echo "[IMPORTANT] Please Run: source setup_lib_path.sh always before running this script"
-echo "###############################"
+echo "######################################################################################"
 echo ""
 
 # Optional runtime check for LD_LIBRARY_PATH
@@ -21,7 +21,7 @@ echo "[INFO] 1. Installing Python dependencies"
 echo "#########################################"
 pip3 install -r python_dependencies.txt
 
-## 2. Download the required traces ~3mins?
+## 2. Download the required traces ~3mins w/ 40 threads
 echo "-----------------------------------------"
 echo ""
 echo "#########################################"

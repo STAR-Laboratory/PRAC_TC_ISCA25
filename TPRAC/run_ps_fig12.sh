@@ -14,7 +14,7 @@ python3 "$PWD/sim_scripts/setup_ps.py" \
     --trace_directory "$PWD/traces" \
     --result_directory "$PWD/results" \
     --trace_list "$PWD/trace_lists/4core_traces.txt" \
-    -rc "run_config_fig9"
+    -rc "run_config_fig12"
 
-echo "[INFO] Starting ChampSim simulations for Figure 9"
-python3 "$PWD/sim_scripts/execute_run_script.py" -rc "run_config_fig9"
+echo "[INFO] Starting ChampSim simulations for Figure 12"
+python3 "$PWD/sim_scripts/execute_run_script.py" -rc "run_config_fig12"
