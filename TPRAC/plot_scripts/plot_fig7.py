@@ -16,6 +16,7 @@ plt.rc('font', size=12)
 # Use Seaborn's 'tab10' color palette
 sns.set_style("whitegrid")
 palette = sns.color_palette("tab10")
+
 colors = {impl: palette[i % len(palette)] for i, impl in enumerate(df['Chip'].unique())}
 
 # Define bar width and x-tick positions
@@ -68,6 +69,9 @@ ax.legend(handles, custom_labels, loc='best', fontsize=12)
 
 ax.set_xlim(-0.5, len(x_ticks)-0.5)
 ax.tick_params(axis='both', which='major', labelsize=12)
+
+plt.grid(True, linestyle=':')
+
 ## Save plots
 plots_dir = '../results/plots'
 os.makedirs(plots_dir, exist_ok=True)
