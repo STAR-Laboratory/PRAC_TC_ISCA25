@@ -23,7 +23,7 @@ We recommend using a modern Linux distribution with support for C++20. For examp
 
 **TPRAC Evaluations:**
 - **Software Requirements:**
-  - `g++` with **C++20** support (tested with versions 11.4.0 and 12.4.0)
+  - `g++` with **C++20** support. We highly recommend using **g++ 12 or newer**, as it significantly reduces the compilation time of ChampSim binaries. This artifact has been tested with **g++ 11 and g++ 12**.
   - `python3` (tested with versions 3.9 and 3.10)
 - **Hardware Recommendations:**
   - We strongly recommend using [Slurm](https://slurm.schedmd.com/documentation.html) with a cluster capable of running bulk experiments to accelerate evaluations.
@@ -41,21 +41,25 @@ Ensure you have already cloned the repository during the PRACLeak evaluations:
 ```bash
 git clone https://github.com/STAR-Laboratory/PRAC_Timing_Channel_ISCA25.git
 ```
+#### 2. Set Required Library Path
+```bash
+cd TPRAC/
+source setup_lib_path.sh
+```
 
-#### 2. Set Simulation Configuration Parameters
+#### 3. Set Simulation Configuration Parameters
 
 ##### Using [Slurm](https://slurm.schedmd.com/documentation.html)
 Configure the following parameters in `./TPRAC/run_artifact.sh` or relevant [Slurm](https://slurm.schedmd.com/documentation.html) scripts (`run_slurm_fig*.sh`):
 - **`SLURM_PART_NAME`**: Partition name for Slurm jobs.
 - **`SLURM_PART_DEF_MEM`**: Default memory size for jobs (recommended: ≥ 6GB).
-- **`SLURM_PART_BIG_MEM`**: Memory size for jobs requiring large memory (recommended: ≥ 12GB).
 - **`MAX_SLURM_JOBS`**: Maximum number of Slurm jobs submitted.
 
 ##### Using a Personal Server
 Configure the following parameter in `./TPRAC/run_artifact.sh` or `run_ps_fig*.sh`:
 - **`PERSONAL_RUN_THREADS`**: Number of parallel threads to use for simulations.
 
-#### 3. Run the Artifact
+#### 4. Run the Artifact
 Run the following commands to install dependencies, build ChampSim and Ramulator2, and execute simulations.
 > **Note:**  Running all experiments on a personal server may take significant time (almost a week). Thus, if using a personal server, we highly recommend first running the security analysis (Figure 7) and main performance experiment (Figure 9) and reviewing the results before proceeding with the full set of experiments (Figure 7 and Figure 9-12).
 
@@ -83,7 +87,7 @@ Run the following commands to install dependencies, build ChampSim and Ramulator
   ./run_artifact.sh -method personal -artifact all
   ```   
 
-#### 4. Collate Results and Generate Figures
+#### 5. Collate Results and Generate Figures
 After completing simulations, use the commands below to collate results and generate plots. Alternatively, use the Jupyter Notebook (`TPRAC/plot_scripts/plot.ipynb`). Generated figures (PDFs) can be found in `TPRAC/results/plots/`.
 
 ##### Security Analysis (Figure 7) and Main Performance Figure (Figure 9)
@@ -115,8 +119,14 @@ Install Python dependencies, download required traces, and build ChampSim and Ra
   ```
 
 #### Performance Evaluations: Figure 9-12
+**Set Required Library Path:**
+```bash
+cd TPRAC/
+source setup_lib_path.sh
+```
+
 **Set simulation configuration parameters:**
-- **Slurm**: Configure `SLURM_PART_NAME`, `SLURM_PART_DEF_MEM`, `SLURM_PART_BIG_MEM`, and `MAX_SLURM_JOBS` in `run_slurm_fig*.sh`.
+- **Slurm**: Configure `SLURM_PART_NAME`, `SLURM_PART_DEF_MEM`, and `MAX_SLURM_JOBS` in `run_slurm_fig*.sh`.
 - **Personal Server**: Configure `PERSONAL_RUN_THREADS` in `run_ps_fig*.sh`.
 
 
@@ -173,14 +183,17 @@ Once simulations complete, generate results (CSV files) using the commands below
   ```
 - **Figure 10: Sensitivity to PRAC Levels (Number of RFMs per ABO)**:
   ```bash
+  cd TPRAC/plot_scripts
   python3 generate_csv_fig10.py
   ```
 - **Figure 11: Sensitivity to Targeted Refreshes**:
   ```bash
+  cd TPRAC/plot_scripts
   python3 generate_csv_fig11.py
   ```
 - **Figure 12: Sensitivity to Rowhammer Threshold**:
   ```bash
+  cd TPRAC/plot_scripts
   python3 generate_csv_fig12.py
   ```
 
