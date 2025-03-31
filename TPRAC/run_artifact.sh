@@ -70,7 +70,9 @@ echo "##################################"
 export MAX_SLURM_JOBS=$MAX_SLURM_JOBS
 export PERSONAL_RUN_THREADS=$PERSONAL_RUN_THREADS
 
-# TODO: 2.1. Run Security Analysis first
+# 2.1. Run Security Analysis first
+echo "[INFO] Running TPRAC Security Analysis: Figure 7"
+bash "$PWD/run_fig7.sh"
 
 # 2.2 Run Performance Experiments
 # Execute based on method and artifact choice
