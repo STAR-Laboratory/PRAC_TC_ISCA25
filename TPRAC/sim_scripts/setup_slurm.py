@@ -5,9 +5,6 @@ import argparse
 import pandas as pd
 import importlib
 
-# TODO: Remove below after testing new implementations
-# from run_config_fig9 import *
-
 argparser = argparse.ArgumentParser(
     prog="RunSlurm",
     description="Run ChampSim with Ramulator2 simulations using Slurm"
@@ -35,9 +32,9 @@ PARTITION_DEF_MEM = args.partition_default_memory
 TRACE_LIST_FILE = args.trace_list
 run_config = importlib.import_module(args.run_config)
 
-# TODO: Change below after testing scripts
-SBATCH_CMD = "sbatch --cpus-per-task=1 --nodes=1 --ntasks=1 --time=36:00:00 \
-                --mail-user=jhwoo36@ece.ubc.ca --mail-type=FAIL --account=st-prashnr-1"
+#### Customize the SBATCH_CMD if you wnat to add more options (e.g., account, time, etc)
+SBATCH_CMD = "sbatch --cpus-per-task=1 --nodes=1 --ntasks=1"
+
 
 CMD_HEADER = "#!/bin/bash"
 
@@ -120,9 +117,9 @@ def get_multicore_run_commands():
             full_traces = " ".join(f"{TRACE_DIR}/{trace}" for trace in trace_group)
 
             ###Enable here if you want to run workloads in taget_workloads list
-            if target_workloads:
-                if trace_names not in target_workloads:
-                    continue
+            # if target_workloads:
+            #     if trace_names not in target_workloads:
+            #         continue
 
             if trace_names in high_memory_intensive_workloads:
                 NUM_EXPECTED_INSTS = run_config.NUM_EXPECTED_INSTS_HIGH

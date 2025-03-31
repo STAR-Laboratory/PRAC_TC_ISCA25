@@ -26,8 +26,8 @@ We recommend using a modern Linux distribution with support for C++20. For examp
   - `g++` with **C++20** support. We highly recommend using **g++ 12 or newer**, as it significantly reduces the compilation time of ChampSim binaries. This artifact has been tested with **g++ 11 and g++ 12**.
   - `python3` (tested with versions 3.9 and 3.10)
 - **Hardware Recommendations:**
-  - We strongly recommend using [Slurm](https://slurm.schedmd.com/documentation.html) with a cluster capable of running bulk experiments to accelerate evaluations.
-  - If using a personal server, we recommend a machine with at least **40 hardware threads with 128GB of memory** to run all evaluations in a reasonable time.
+  - We strongly recommend using [Slurm](https://slurm.schedmd.com/documentation.html) with a cluster capable of running bulk experiments (e.g., $\geq$ 500 jobs) to accelerate evaluations.
+  - If using a personal server, we recommend a machine with at least **80 hardware threads with 128GB of memory** to run all evaluations in a reasonable time.
 
 ## PRACLeak Evaluations
 <!-- To Joyce: Please Fill out here -->
@@ -64,12 +64,12 @@ Run the following commands to install dependencies, build ChampSim and Ramulator
 > **Note:**  Running all experiments on a personal server may take significant time (almost a week). Thus, if using a personal server, we highly recommend first running the security analysis (Figure 7) and main performance experiment (Figure 9) and reviewing the results before proceeding with the full set of experiments (Figure 7 and Figure 9-12).
 
 ##### Security Analysis (Figure 7) and Main Performance Experiment (Figure 9)
-- **Using Slurm**: Faster (~16 hours on a cluster with 500+ cores).
+- **Using Slurm**: Faster (~20 hours on a cluster with 500+ cores).
   ```bash
   cd TPRAC/
   ./run_artifact.sh --method slurm --artifact main
   ```
-- **Using a Personal Server**: Slower (~1 day on an Intel Xeon with 128GB memory).
+- **Using a Personal Server**: Slower (~1 day on an Intel Xeon with 80 HW threads with 128GB memory).
   ```bash
   cd TPRAC/
   ./run_artifact.sh --method personal --artifact main
@@ -81,7 +81,7 @@ Run the following commands to install dependencies, build ChampSim and Ramulator
   cd TPRAC/
   ./run_artifact.sh -method slurm -artifact all
   ```
-- **Using a Personal Server**: Slower (~1 week on an Intel Xeon with 128GB memory).   
+- **Using a Personal Server**: Slower (~1 week on an Intel Xeon with 80 HW threads with 128GB memory).   
   ```bash
   cd TPRAC/
   ./run_artifact.sh -method personal -artifact all

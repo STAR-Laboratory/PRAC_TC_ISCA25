@@ -6,7 +6,7 @@ SLURM_PART_NAME="${SLURM_PART_NAME:-skylake}"  # Default value is "skylake" if n
 SLURM_PART_DEF_MEM="${SLURM_PART_DEF_MEM:-6G}"  # Default memory size is '6G' if not set
 
 # Export MAX_SLURM_JOBS with default values if not already set
-export MAX_SLURM_JOBS=${MAX_SLURM_JOBS:-1000}
+export MAX_SLURM_JOBS=${MAX_SLURM_JOBS:-500}
 
 # Check if SLURM variables are set (if manually overridden or passed from environment)
 echo "[INFO] SLURM_PART_NAME: $SLURM_PART_NAME"
@@ -28,5 +28,5 @@ echo "[INFO] Starting ChampSim simulations for Figure 11"
 python3 "$PWD/sim_scripts/execute_run_script.py" -rc "run_config_fig11" --slurm
 
 # TODO: Show how long it takes for simulations
-echo "[INFO] Fired all simulations for Figure 11"
+echo "[INFO] Fired all simulations for Figure 11: This can take ~20 hours"
 rm "$PWD/run.sh" 

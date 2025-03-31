@@ -5,9 +5,6 @@ import argparse
 import pandas as pd
 import importlib
 
-# TODO: Remove below after testing new implementations
-# from run_config_fig9 import *
-
 argparser = argparse.ArgumentParser(
     prog="RunSlurm",
     description="Run ChampSim with Ramulator2 simulations using Slurm"
