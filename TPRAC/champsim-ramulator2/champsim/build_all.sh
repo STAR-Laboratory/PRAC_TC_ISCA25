@@ -4,7 +4,6 @@ echo ""
 echo "#########################################"
 echo "[INFO] Building All ChampSim Binaries"
 echo "#########################################"
-# TODO: Temporary check build time
 start_time=$(date +%s)
 # Get the directory of this script
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -23,8 +22,6 @@ for config_file in "$CONFIG_DIR"/*.json; do
     ./build_champsim.sh "$config_file"
 done
 
-echo "All configurations have been built successfully."
-# TODO: Temporary check build time
 end_time=$(date +%s)
 elapsed=$(( end_time - start_time ))
 echo ""
