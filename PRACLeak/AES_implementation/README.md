@@ -1,0 +1,1 @@
+The AES T-table implementation is adapted from https://github.com/pjok1122/AES-Optimization. We modified the code to remove unnecessary rounds of encryption that our attack is not concerned of.

@@ -23,12 +23,56 @@ We recommend using a modern Linux distribution with support for C++20. For examp
   - `python3` (tested with versions 3.9 and 3.10)
   
 **Hardware Recommendations:**
+- **PRACLeak Evaluations:** Any modern desktop/laptop should suffice. A laptop with a 2-core CPU and 16GB of memory can perform the PRACLeak analysis within ~8 hours.
+
+- **TPRAC Evaluations:**
   - We strongly recommend using [Slurm](https://slurm.schedmd.com/documentation.html) with a cluster capable of running bulk experiments (e.g., $\geq$ 500 jobs) to accelerate evaluations.
   - If using a personal server, we recommend a machine with at least **80 hardware threads with 128GB of memory** to run all evaluations in a reasonable time.
 
 ## Steps for PRACLeak Evaluation
-We will add PRACLeak evaluation steps soon.
-<!-- To Joyce: Please Fill out here -->
+
+Please run the following steps to run TPRAC security analysis and performance evaluations and regenerate results and figures (Figures 7 and 9-12).
+
+#### 1. Clone the Repository
+Ensure you have already cloned the repository during the PRACLeak evaluations:
+```bash
+git clone https://github.com/STAR-Laboratory/PRAC_Timing_Channel_ISCA25.git
+```
+
+#### 2. Set up the Pin tool (Optional)
+Pin3.7 is needed for the [trace generator](/https://github.com/CMU-SAFARI/ramulator/tree/master/trace_generator) tool provided in [Ramulator](/https://github.com/CMU-SAFARI/ramulator), which we use to generate program traces for the AES T-table implementation. **This step is optional as we also provide scripts to download all generated traces.**
+
+Pin3.7 can be downloaded [here](/https://software.intel.com/sites/landingpage/pintool/downloads/pin-3.7-97619-g0d0c92f4f-gcc-linux.tar.gz), or installed with the following script.
+
+```bash
+wget https://software.intel.com/sites/landingpage/pintool/downloads/pin-3.7-97619-g0d0c92f4f-gcc-linux.tar.gz
+tar -xvzf pin-3.7-97619-g0d0c92f4f-gcc-linux.tar.gz
+```
+
+Then, set `PIN_ROOT` as the directory to the pin tool in the following scripts.
+- In `PRAC_Timing_Channel_ISCA25/PRACLeak/run_artifact.sh`, on line 42, `export PIN_ROOT= your/path/to/pin/tools/pin-3.7-97619-g0d0c92f4f-gcc-linux`
+- In `PRAC_TC_ISCA25/PRACLeak/scripts/util_scripts/gen_aes_code_traces.sh`, on line 15, `export PIN_ROOT= your/path/to/pin/tools/pin-3.7-97619-g0d0c92f4f-gcc-linux`
+
+Finally, configure the pin tool as specified by trace generator.
+- `cd $PIN_ROOT/source/tools/Config`
+- add `-std=c++11 -faligned-new` to `makefile.unix.config:109`.
+- New line should look like this:
+    `TOOL_CXXFLAGS_NOOPT := -std=c++11 -faligned-new -Wall -Werror -Wno-unknown-pragmas -D__PIN__=1 -DPIN_CRT=1`
+
+#### 3. Run the Artifact
+
+Run the following commands to install dependencies, build trace generator and Ramulator2, and execute simulations. 
+
+```bash
+cd PRACLeak
+bash ./run_artifact.sh --use_sample
+```
+We highly recommend using the `--use_sample` flag which allows you run without having to setup Pin, to download all necessary traces and to avoid regenerating them. Without the flag, you would need root priviledge in order to run trace generator:
+
+```bash
+cd PRACLeak
+sudo bash ./run_artifact.sh
+```
 
 ## Steps for TPRAC Evaluation
 

@@ -1,0 +1,54 @@
+Frontend:
+  Translation:
+    impl: NoTranslation
+    max_addr: 17179869184
+  clock_ratio: 8
+  impl: BHO3
+  inst_window_depth: 128
+  latency_path: ./results/stats/AES_with_defense/latency_0.out
+  llc_capacity_per_core: 4MB
+  llc_num_mshr_per_core: 16
+  no_wait_traces:
+  - ./traces/AES_attackers/monitor_verify.trace
+  - ./traces/AES_attackers/flush.trace
+  num_expected_insts: 3500000
+  traces:
+  - ./traces/AES_traces/0.trace
+MemorySystem:
+  AddrMapper:
+    impl: RoCoRaBaCh
+  BHDRAMController:
+    BHScheduler:
+      impl: PRACScheduler
+    RefreshManager:
+      impl: AllBank
+    RowPolicy:
+      cap: 1
+      impl: ClosedRowPolicy
+    impl: PRACDRAMController
+    plugins:
+    - ControllerPlugin:
+        abo_act_ns: 180
+        abo_delay_acts: 4
+        abo_recovery_refs: 4
+        abo_threshold: 256
+        impl: PRAC
+    - ControllerPlugin:
+        impl: TraceRecorder
+        path: ./results/stats/AES_no_defense/0
+    - ControllerPlugin:
+        impl: TimingBasedRFM
+        m_TB_RFM_window_ns: 1442
+  DRAM:
+    PRAC: true
+    RFM:
+      BRC: 2
+    impl: DDR5-VRR
+    org:
+      channel: 1
+      preset: DDR5_16Gb_x8
+      rank: 2
+    timing:
+      preset: DDR5_3200AN
+  clock_ratio: 3
+  impl: BHDRAMSystem
