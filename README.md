@@ -31,10 +31,9 @@ We recommend using a modern Linux distribution with support for C++20. For examp
 
 ## Steps for PRACLeak Evaluation
 
-Please run the following steps to run TPRAC security analysis and performance evaluations and regenerate results and figures (Figures 7 and 9-12).
+Please run the following steps to run PRACLeak Evaluation and regenerate results and figures (Figures 3-5 and 13).
 
 #### 1. Clone the Repository
-Ensure you have already cloned the repository during the PRACLeak evaluations:
 ```bash
 git clone https://github.com/STAR-Laboratory/PRAC_Timing_Channel_ISCA25.git
 ```
