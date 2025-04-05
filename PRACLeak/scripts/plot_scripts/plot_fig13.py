@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 from matplotlib.colors import LinearSegmentedColormap
 import numpy as np
+import os
 
 NUM_TESTS = 256
 VICTIM_CUTOFF   = 300
@@ -16,6 +17,10 @@ def dram_cycle_to_ns(dram_cycle):
     return int(dram_cycle * 0.625)
 
 def read_file(filename, i, base_row=base_row, verbose=False):
+    if not os.path.exists(filename):
+        print(f"File {filename} does not exist. Skipping.")
+        return
+    
     with open(filename, "r") as file:
 
         ACT_flag = False

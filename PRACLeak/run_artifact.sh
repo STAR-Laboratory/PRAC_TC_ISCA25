@@ -6,12 +6,12 @@ use_sample=false
 # Parse arguments
 for arg in "$@"; do
   case $arg in
-    --use-sample)
+    --use_sample)
       use_sample=true
       shift
       ;;
     *)
-      echo "Usage: $0 [--use-sample]"
+      echo "Usage: $0 [--use_sample]"
       exit 1
       ;;
   esac
@@ -39,7 +39,7 @@ else
   echo "[INFO] Generating AES traces"
   echo "#####################"
 
-  export PIN_ROOT= your/path/to/pin/tools/pin-3.7-97619-g0d0c92f4f-gcc-linux
+  export PIN_ROOT=your/path/to/pin/tools/pin-3.7-97619-g0d0c92f4f-gcc-linux
 
   echo "Building trace generator"
   cd trace_generator
@@ -62,7 +62,7 @@ echo "#####################"
 
 python3 ./scripts/util_scripts/gen_aes_attack_traces.py "$PWD/traces/AES_attackers"
 # TODO covert channel traces
-wget simple_AES.trace "https://zenodo.org/records/15113127/files/simple_AES.trace?download=1"
+wget -O simple_AES.trace "https://zenodo.org/records/15113127/files/simple_AES.trace?download=1"
 cp simple_AES.trace ./traces/
 rm simple_AES.trace
 
@@ -71,7 +71,7 @@ echo "#####################"
 echo "[INFO] Building Ramulator2"
 echo "#####################"
 
-# mkdir -p ramulator2/build
+mkdir -p ramulator2/build
 cd ramulator2/build
 cmake ..
 make -j
@@ -82,6 +82,12 @@ cd -
 echo "#####################"
 echo "[INFO] Running experiments"
 echo "#####################"
+
+mkdir -p results/stats/latency
+mkdir -p results/stats/side_channel
+mkdir -p results/stats/AES_no_defense
+mkdir -p results/stats/AES_with_defense
+mkdir -p results/plots
 
 # Figure 3
 bash ./scripts/sim_scripts/run_latency.sh

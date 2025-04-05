@@ -14,4 +14,4 @@ python3 plot_fig5.py
 echo "[INFO] Plotting Figure 13"
 python3 plot_fig13.py
 
-cd ../
+cd -
