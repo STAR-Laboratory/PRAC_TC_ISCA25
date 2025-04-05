@@ -74,7 +74,7 @@ echo "#####################"
 mkdir -p ramulator2/build
 cd ramulator2/build
 cmake ..
-make -j
+make -j$(nproc)
 cp ./ramulator2 ../ramulator2
 cd -
 
