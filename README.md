@@ -73,6 +73,14 @@ cd PRACLeak
 sudo bash ./run_artifact.sh
 ```
 
+#### 4. Plot Figures
+
+Run the following scripts to plot Figure 3, 4, 5, and 13. Generated plots will be stored in `PRAC_TC_ISCA25/PRACLeak/results/plots/`.
+
+```bash
+bash ./plot_all_figures.sh
+```
+
 ## Steps for TPRAC Evaluation
 
 Please run the following steps to run TPRAC security analysis and performance evaluation and regenerate results and figures (Figures 7 and 9-12).
