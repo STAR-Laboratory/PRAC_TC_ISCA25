@@ -51,14 +51,18 @@ for i in range(NUM_TESTS):
     read_file(filename, i)
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6.5,3), gridspec_kw={'width_ratios': [1, 1]})
-cax1 = ax1.imshow(victim_count.transpose(), cmap='cool', interpolation='nearest', aspect='auto')
+
+vmin = min(np.min(np.array(victim_count)), np.min(np.array(attacker_count)))
+vmax = max(np.max(np.array(victim_count)), np.max(np.array(attacker_count)))
+
+cax1 = ax1.imshow(victim_count.transpose(), cmap='cool', interpolation='nearest', aspect='auto', vmin=vmin, vmax=vmax)
 ax1.set_title("Victim Activations")
 ax1.set_xlabel(r"Value of Secret Key Byte 0 ($k_0$)")
 ax1.set_ylabel("Row")
 ax1.set_aspect("auto")
 # fig.colorbar(cax1, ax=ax1, orientation='vertical')
 
-cax2 = ax2.imshow(attacker_count.transpose(), cmap='cool', interpolation='nearest', aspect='auto')
+cax2 = ax2.imshow(attacker_count.transpose(), cmap='cool', interpolation='nearest', aspect='auto', vmin=vmin, vmax=vmax)
 ax2.set_title("Attacker Activations\nto Row Causing ABO")
 ax2.set_xlabel(r"Value of Secret Key Byte 0 ($k_0$)")
 ax2.set_ylabel("Row")
