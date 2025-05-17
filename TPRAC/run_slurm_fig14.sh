@@ -27,5 +27,5 @@ python3 "$PWD/sim_scripts/setup_slurm.py" \
 echo "[INFO] Starting ChampSim simulations for Figure 14"
 python3 "$PWD/sim_scripts/execute_run_script.py" -rc "run_config_fig14" --slurm
 
-echo "[INFO] Fired all simulations for Figure 14: This can take ~20 hours"
+echo "[INFO] Fired all simulations for Figure 14: This can take ~2 days (For 602.gcc)"
 rm "$PWD/run.sh" 

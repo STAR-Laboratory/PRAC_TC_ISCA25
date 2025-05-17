@@ -78,14 +78,15 @@ if [[ "$METHOD" == "slurm" ]]; then
     echo "[INFO] Running experiments with SLURM"
     if [[ "$ARTIFACT" == "all" ]]; then
         echo "[INFO] Running all required experiments"
-        SLURM_PART_NAME="$SLURM_PART_NAME" SLURM_PART_DEF_MEM="$SLURM_PART_DEF_MEM" bash "$PWD/run_slurm_fig9.sh"
         SLURM_PART_NAME="$SLURM_PART_NAME" SLURM_PART_DEF_MEM="$SLURM_PART_DEF_MEM" bash "$PWD/run_slurm_fig10.sh"
         SLURM_PART_NAME="$SLURM_PART_NAME" SLURM_PART_DEF_MEM="$SLURM_PART_DEF_MEM" bash "$PWD/run_slurm_fig11.sh"
         SLURM_PART_NAME="$SLURM_PART_NAME" SLURM_PART_DEF_MEM="$SLURM_PART_DEF_MEM" bash "$PWD/run_slurm_fig12.sh"
+        SLURM_PART_NAME="$SLURM_PART_NAME" SLURM_PART_DEF_MEM="$SLURM_PART_DEF_MEM" bash "$PWD/run_slurm_fig13.sh"
+        SLURM_PART_NAME="$SLURM_PART_NAME" SLURM_PART_DEF_MEM="$SLURM_PART_DEF_MEM" bash "$PWD/run_slurm_fig14.sh"
       
     elif [[ "$ARTIFACT" == "main" ]]; then
-        echo "[INFO] Running main performance experiment only (Figure 9)"
-        SLURM_PART_NAME="$SLURM_PART_NAME" SLURM_PART_DEF_MEM="$SLURM_PART_DEF_MEM" bash "$PWD/run_slurm_fig9.sh"
+        echo "[INFO] Running main performance experiment only (Figure 10)"
+        SLURM_PART_NAME="$SLURM_PART_NAME" SLURM_PART_DEF_MEM="$SLURM_PART_DEF_MEM" bash "$PWD/run_slurm_fig10.sh"
     else
         echo "[ERROR] Invalid artifact choice: $ARTIFACT"
         usage
