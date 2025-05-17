@@ -73,7 +73,9 @@ if __name__ == "__main__":
     # champsim_bin_dir = f"{num_cores}cores-2CH-4RA"
 
     ## 5. Set required parameters: Ex) RowHammer thresholds, mitigation lists
-    mitigation_lists = ['Baseline', 'TPRAC-TREFper4tREFI', 'TPRAC-TREFper3tREFI', 'TPRAC-TREFper2tREFI', 'TPRAC-TREFpertREFI', 'ABO_Only', 'ABO_RFM', 'TPRAC']
+    mitigation_lists = ['Baseline', 'ABO_Only', 'ABO_RFM', 
+                        'TPRAC', 'TPRAC-TREFper4tREFI', 'TPRAC-TREFper3tREFI', 'TPRAC-TREFper2tREFI', 'TPRAC-TREFpertREFI', 
+                        'TPRAC-NoReset', 'TPRAC-NoReset-TREFper4tREFI', 'TPRAC-NoReset-TREFper2tREFI', 'TPRAC-NoReset-TREFpertREFI']
     # mitigation_lists = ['Baseline', 'ABO_Only', 'ABO_RFM', 'TPRAC']
     NRH_lists = [128, 256, 512, 1024, 2048, 4096]
     
@@ -91,7 +93,8 @@ if __name__ == "__main__":
                         if PRAC_level != 1:
                             if NRH != 1024:
                                 continue
-                        if mitigation in ['TPRAC-TREFper4tREFI', 'TPRAC-TREFper3tREFI', 'TPRAC-TREFper2tREFI', 'TPRAC-TREFpertREFI']:
+                        if mitigation in ['TPRAC-TREFper4tREFI', 'TPRAC-TREFper3tREFI', 'TPRAC-TREFper2tREFI', 'TPRAC-TREFpertREFI',
+                                          'TPRAC-NoReset', 'TPRAC-NoReset-TREFper4tREFI', 'TPRAC-NoReset-TREFper2tREFI', 'TPRAC-NoReset-TREFpertREFI']:
                             if PRAC_level != 1:
                                 continue
                         ### For main performance results

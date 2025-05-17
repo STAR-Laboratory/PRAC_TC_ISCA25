@@ -42,6 +42,20 @@ def get_tprac_parameters(tRH):
             return NBO
     return 32
 
+def get_tprac_noreset_parameters(tRH):
+    nrh_nbo_pairs = [
+        (128, 870),
+        (256, 1286),
+        (512, 2378),
+        (1024, 4510),
+        (2048, 8878),
+        (4096, 17458),
+    ]
+    for nrh, NBO in nrh_nbo_pairs:
+        if tRH <= nrh:
+            return NBO
+    return 32
+
 if __name__ == "__main__":
     print(get_abo_only_parameters(1024))
     print(get_bat_parameters(1024))

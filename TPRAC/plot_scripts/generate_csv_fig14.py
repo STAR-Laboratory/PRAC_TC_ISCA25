@@ -11,7 +11,7 @@ multi_cores_out_path = '../results'
 df = pd.DataFrame(columns=["mitigation", "workload"])
 df_baseline = pd.DataFrame(columns=["mitigation", "workload"])
 
-mitigation_list = ["Baseline", "ABO_Only", 'ABO_RFM', 'TPRAC']
+mitigation_list = ["Baseline", 'TPRAC', 'TPRAC-TREFpertREFI', 'TPRAC-TREFper4tREFI', 'TPRAC-NoReset', 'TPRAC-NoReset-TREFpertREFI', 'TPRAC-NoReset-TREFper4tREFI']
 for mitigation in mitigation_list:
     result_path = multi_cores_out_path + "/" + mitigation +"/stats/"
     result_list = [x[:-4] for x in os.listdir(result_path) if x.endswith(".txt")]
@@ -56,7 +56,9 @@ for mitigation in mitigation_list:
                     NRH = int(result_filename.split("_")[5])
                     PRAC_level = int(result_filename.split("_")[6])
                     workload = result_filename.split("_")[7]
-                if PRAC_level != 1 or NRH != 1024:
+                if PRAC_level != 1:
+                    continue
+                if NRH != 1024 and workload in ['602.gcc', 'nutch']:
                     continue
             else:
                 branch = result_filename.split("_")[0]
@@ -64,7 +66,9 @@ for mitigation in mitigation_list:
                 NRH = int(result_filename.split("_")[4])
                 PRAC_level = int(result_filename.split("_")[5])
                 workload = result_filename.split("_")[6]
-                if PRAC_level != 1 or NRH != 1024:
+                if PRAC_level != 1:
+                    continue
+                if NRH != 1024 and workload in ['602.gcc', 'nutch']:
                     continue
                 
         w0=''
@@ -258,7 +262,7 @@ def add_all_workloads_geomean_rows(df):
     return pd.concat([df, pd.DataFrame(geomean_rows)], ignore_index=True)
 
 
-mitigation_list = ["ABO_Only", 'ABO_RFM', 'TPRAC']
+mitigation_list = ['TPRAC', 'TPRAC-TREFpertREFI', 'TPRAC-TREFper4tREFI', 'TPRAC-NoReset', 'TPRAC-NoReset-TREFpertREFI', 'TPRAC-NoReset-TREFper4tREFI']
 new_column_order = ['workload', 'NRH', 'Prac Level'] + mitigation_list
 
 geomean_df = add_geomean_rows(df_perf)
@@ -268,4 +272,4 @@ geomean_df = geomean_df[new_column_order]
 
 ### Results for main performance and energy results using hashed_perceptron and spp_dev 
 print(geomean_df[geomean_df['workload'] == 'All (50)'])
-geomean_df.to_csv(os.path.join(csv_dir, 'results_fig9.csv'), index=False)
+geomean_df.to_csv(os.path.join(csv_dir, 'results_fig14.csv'), index=False)

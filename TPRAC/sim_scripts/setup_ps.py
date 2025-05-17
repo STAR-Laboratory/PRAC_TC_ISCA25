@@ -54,10 +54,7 @@ for trace_group in trace_groups:
     trace_names = trace_names.split(".champsimtrace.xz")[0]  # Remove ".champsimtrace.xz"
     trace_names = trace_names.split("_core0")[0]  # Remove any "_core0" suffix
 
-high_memory_intensive_workloads = ['410.bwaves_1963B', '429.mcf_22B', '437.leslie3d_134B',
-                                   '450.soplex_247B', '462.libquantum_714B', '470.lbm_1274B', '471.omnetpp_188B',
-                                    '605.mcf_s_1152B', '619.lbm_s_2676B', '620.omnetpp_s_141B', '654.roms_s_1007B',
-                                    'nutch', 'cloud9','cassandra','classification']
+cloudsuite_workloads = ['nutch', 'cloud9', 'cassandra', 'classification']
 
 
 # target_workloads = []
@@ -112,12 +109,12 @@ def get_multicore_run_commands():
             #     if trace_names not in target_workloads:
             #         continue
 
-            if trace_names in high_memory_intensive_workloads:
-                NUM_EXPECTED_INSTS = run_config.NUM_EXPECTED_INSTS_HIGH
-                WARMUP_INSTS = run_config.WARMUP_INSTS_HIGH
+            if trace_names in cloudsuite_workloads:
+                NUM_EXPECTED_INSTS = run_config.NUM_EXPECTED_INSTS_CLOUD
+                WARMUP_INSTS = run_config.WARMUP_INSTS_CLOUD
             else:
-                NUM_EXPECTED_INSTS = run_config.NUM_EXPECTED_INSTS_LOW
-                WARMUP_INSTS = run_config.WARMUP_INSTS_LOW
+                NUM_EXPECTED_INSTS = run_config.NUM_EXPECTED_INSTS_SPEC
+                WARMUP_INSTS = run_config.WARMUP_INSTS_SPEC
             # Construct the command step by step
             if mitigation == 'Baseline':
                 CMD = (

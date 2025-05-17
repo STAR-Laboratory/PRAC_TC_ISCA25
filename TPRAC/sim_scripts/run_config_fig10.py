@@ -19,11 +19,11 @@ SLURM_RETRY_DELAY = 5 * SECONDS_IN_MINUTE
 PERSONAL_RUN_THREADS = int(os.getenv('PERSONAL_RUN_THREADS', 40))
 
 # Number of instructions the slowest core must execute before the simulation ends
-NUM_EXPECTED_INSTS_LOW = 200_000_000
-WARMUP_INSTS_LOW = 50_000_000
+NUM_EXPECTED_INSTS_SPEC = 200_000_000
+WARMUP_INSTS_SPEC = 50_000_000
 
-NUM_EXPECTED_INSTS_HIGH = 100_000_000
-WARMUP_INSTS_HIGH = 25_000_000
+NUM_EXPECTED_INSTS_CLOUD = 100_000_000
+WARMUP_INSTS_CLOUD = 25_000_000
 
 NUM_RANKS = 4
 NUM_CH = 1
@@ -41,7 +41,7 @@ mitigation_list = ['Baseline', 'TPRAC', 'ABO_Only', 'ABO_RFM']
 NRH_lists = [1024]
 
 ##### PRAC Levels -- # of RFMs per ABO
-PRAC_levels = [2, 4]
+PRAC_levels = [1]
 
 params_list = [
     mitigation_list,

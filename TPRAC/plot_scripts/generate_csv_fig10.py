@@ -56,7 +56,7 @@ for mitigation in mitigation_list:
                     NRH = int(result_filename.split("_")[5])
                     PRAC_level = int(result_filename.split("_")[6])
                     workload = result_filename.split("_")[7]
-                if NRH != 1024:
+                if PRAC_level != 1 or NRH != 1024:
                     continue
             else:
                 branch = result_filename.split("_")[0]
@@ -64,7 +64,7 @@ for mitigation in mitigation_list:
                 NRH = int(result_filename.split("_")[4])
                 PRAC_level = int(result_filename.split("_")[5])
                 workload = result_filename.split("_")[6]
-                if NRH != 1024:
+                if PRAC_level != 1 or NRH != 1024:
                     continue
                 
         w0=''

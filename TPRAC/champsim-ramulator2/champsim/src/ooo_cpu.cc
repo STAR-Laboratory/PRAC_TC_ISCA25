@@ -61,8 +61,15 @@ long O3_CPU::operate()
     auto phase_instr{std::ceil(num_retired - begin_phase_instr)};
     auto phase_cycle{double_duration{current_time - begin_phase_time} / clock_period};
 
-    fmt::print("Heartbeat CPU {} instructions: {} cycles: {} heartbeat IPC: {:.4g} cumulative IPC: {:.4g} (Simulation time: {:%H hr %M min %S sec})\n", cpu,
-               num_retired, current_time.time_since_epoch() / clock_period, heartbeat_instr / heartbeat_cycle, phase_instr / phase_cycle, elapsed_time());
+    // Calculate the total hours to display
+    auto total_sim_seconds = elapsed_time();
+    auto total_hrs = std::chrono::duration_cast<std::chrono::hours>(total_sim_seconds);
+    auto remainder_duration = total_sim_seconds - total_hrs;
+
+    fmt::print("Heartbeat CPU {} instructions: {} cycles: {} heartbeat IPC: {:.4g} cumulative IPC: {:.4g} (Simulation time: {} hr {:%M min %S sec})\n", cpu,
+               num_retired, current_time.time_since_epoch() / clock_period, heartbeat_instr / heartbeat_cycle, phase_instr / phase_cycle, total_hrs.count(), remainder_duration);
+
+    std::fflush(stdout); // Force flush to make output appear immediately
 
     last_heartbeat_instr = num_retired;
     last_heartbeat_time = current_time;

@@ -11,7 +11,7 @@ multi_cores_out_path = '../results'
 df = pd.DataFrame(columns=["mitigation", "workload"])
 df_baseline = pd.DataFrame(columns=["mitigation", "workload"])
 
-mitigation_list = ["Baseline", 'ABO_Only', 'ABO_RFM', 'TPRAC', 'TPRAC-TREFpertREFI', 'TPRAC-TREFper2tREFI', 'TPRAC-TREFper4tREFI']
+mitigation_list = ["Baseline", 'TPRAC', 'TPRAC-TREFpertREFI', 'TPRAC-TREFper2tREFI', 'TPRAC-TREFper3tREFI', 'TPRAC-TREFper4tREFI']
 for mitigation in mitigation_list:
     result_path = multi_cores_out_path + "/" + mitigation +"/stats/"
     result_list = [x[:-4] for x in os.listdir(result_path) if x.endswith(".txt")]
@@ -56,7 +56,7 @@ for mitigation in mitigation_list:
                     NRH = int(result_filename.split("_")[5])
                     PRAC_level = int(result_filename.split("_")[6])
                     workload = result_filename.split("_")[7]
-                if PRAC_level != 1:
+                if NRH != 1024 or PRAC_level != 1:
                     continue
             else:
                 branch = result_filename.split("_")[0]
@@ -64,7 +64,7 @@ for mitigation in mitigation_list:
                 NRH = int(result_filename.split("_")[4])
                 PRAC_level = int(result_filename.split("_")[5])
                 workload = result_filename.split("_")[6]
-                if PRAC_level != 1:
+                if NRH != 1024 or PRAC_level != 1:
                     continue
                 
         w0=''
@@ -258,7 +258,7 @@ def add_all_workloads_geomean_rows(df):
     return pd.concat([df, pd.DataFrame(geomean_rows)], ignore_index=True)
 
 
-mitigation_list = ['ABO_Only', 'ABO_RFM', 'TPRAC', 'TPRAC-TREFpertREFI', 'TPRAC-TREFper2tREFI', 'TPRAC-TREFper4tREFI']
+mitigation_list = ['TPRAC', 'TPRAC-TREFpertREFI', 'TPRAC-TREFper2tREFI', 'TPRAC-TREFper3tREFI', 'TPRAC-TREFper4tREFI']
 new_column_order = ['workload', 'NRH', 'Prac Level'] + mitigation_list
 
 geomean_df = add_geomean_rows(df_perf)

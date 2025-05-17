@@ -100,8 +100,8 @@ plt.tight_layout()
 plt.subplots_adjust(wspace=0.3)
 
 # plt.savefig('heatmap_defense.pdf', dpi=300, bbox_inches='tight')
-plt.savefig('../../results/plots/Figure13.pdf', bbox_inches='tight')
-print("Figure 13 generated.")
+plt.savefig('../../results/plots/Figure9.pdf', bbox_inches='tight')
+print("Figure 9 generated.")
 
 
 

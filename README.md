@@ -1,13 +1,13 @@
-# When Mitigations Backfire: Timing Channel Attacks and Defense for PRAC-Based Rowhammer Mitigations (ISCA 2025)
-
+# When Mitigations Backfire: Timing Channel Attacks and Defense for PRAC-Based RowHammer Mitigations (ISCA 2025)
+<!-- TODO: 1) Add citation information after ISCA -->
 ## Introduction
 This repository contains the artifact for our ISCA 2025 paper:  
-**"When Mitigations Backfire: Timing Channel Attacks and Defense for PRAC-Based Rowhammer Mitigations"**
+[**"When Mitigations Backfire: Timing Channel Attacks and Defense for PRAC-Based RowHammer Mitigations"**](https://jeonghyunwoo0306.github.io/assets/pdf/ISCA25_When_Mitigations_Backfire.pdf)
 
-**Authors**:  [Jeonghyun Woo](https://jeonghyunwoo0306.github.io/) (University of British Columbia), Joyce Qu (University of Toronto), [Gururaj Saileshwar](https://gururaj-s.github.io/) (University of Toronto), and [Prashant Nair](https://prashantnair.bitbucket.io/) (University of British Columbia).
+**Authors**:  [Jeonghyun Woo](https://jeonghyunwoo0306.github.io/) (The University of British Columbia), [Joyce Qu](https://www.linkedin.com/in/joycequ/) (University of Toronto), [Gururaj Saileshwar](https://gururaj-s.github.io/) (University of Toronto), and [Prashant J. Nair](https://prashantnair.bitbucket.io/) (The University of British Columbia).
 
 This artifact allows you to reproduce the key results for:
-- **PRACLeak**: a timing-based covert and side channel attack against PRAC-based Rowhammer mitigations.
+- **PRACLeak**: timing-based covert and side-channel attacks against PRAC-based RowHammer mitigations.
 - **TPRAC**: our proposed mitigation that eliminates such information leakage.
 
 ## Acknowledgement
@@ -31,7 +31,7 @@ We recommend using a modern Linux distribution with support for C++20. For examp
 
 ## Steps for PRACLeak Evaluation
 
-Please run the following steps to run PRACLeak Evaluation and regenerate results and figures (Figures 3-5 and 13).
+Please run the following steps to run PRACLeak Evaluation and regenerate results and figures (Figures 3-5 and 9).
 
 #### 1. Clone the Repository
 ```bash
@@ -75,7 +75,7 @@ sudo bash ./run_artifact.sh
 
 #### 4. Plot Figures
 
-Run the following scripts to plot Figure 3, 4, 5, and 13. Generated plots will be stored in `PRAC_TC_ISCA25/PRACLeak/results/plots/`.
+Run the following scripts to plot Figure 3, 4, 5, and 9. Generated plots will be stored in `PRAC_TC_ISCA25/PRACLeak/results/plots/`.
 
 ```bash
 bash ./plot_all_figures.sh
@@ -83,7 +83,7 @@ bash ./plot_all_figures.sh
 
 ## Steps for TPRAC Evaluation
 
-Please run the following steps to run TPRAC security analysis and performance evaluation and regenerate results and figures (Figures 7 and 9-12).
+Please run the following steps to run TPRAC security analysis and performance evaluation and regenerate results and figures (Figures 7 and 10-14).
 
 #### 1. Clone the Repository
 Ensure you have already cloned the repository during the PRACLeak evaluation:
@@ -112,7 +112,7 @@ Configure the following parameter in `./TPRAC/run_artifact.sh` or `run_ps_fig*.s
 Run the following commands to install dependencies, download traces, generate ChampSim configurations, build ChampSim and Ramulator2, and execute simulations.
 > **Note:**  Running all experiments on a personal server may take significant time (almost a week). Thus, if using a personal server, we highly recommend first running the security analysis (Figure 7) and main performance experiment (Figure 9) and reviewing the results before proceeding with the full set of experiments (Figure 7 and Figure 9-12).
 
-##### Security Analysis (Figure 7) and Main Performance Experiment (Figure 9)
+##### Security Analysis (Figure 7) and Main Performance Experiment (Figure 10)
 - **Using Slurm**: Faster (~20 hours on a cluster with 500+ cores).
   ```bash
   cd TPRAC/
@@ -124,7 +124,7 @@ Run the following commands to install dependencies, download traces, generate Ch
   ./run_artifact.sh --method personal --artifact main
   ```
 
-##### Security Analysis (Figure 7) and All Performance Experiments (Figures 9-12)
+##### Security Analysis (Figure 7) and All Performance Experiments (Figures 10-14)
 - **Using Slurm**: Faster (~2 days on a cluster with 500+ cores).
   ```bash
   cd TPRAC/
@@ -139,13 +139,13 @@ Run the following commands to install dependencies, download traces, generate Ch
 #### 5. Collate Results and Generate Figures
 After completing simulations, use the commands below to collate results and generate plots. Alternatively, use the Jupyter Notebook (`TPRAC/plot_scripts/plot.ipynb`). Generated figures (PDFs) can be found in `TPRAC/results/plots/`.
 
-##### Security Analysis (Figure 7) and Main Performance Figure (Figure 9)
+##### Security Analysis (Figure 7) and Main Performance Figure (Figure 10)
 ```bash
 cd TPRAC/
 ./plot_main_figure.sh
 ```
 
-##### All Figures (Figures 7 and 9–12)
+##### All Figures (Figures 7 and 10–14)
 ```bash
 cd TPRAC/
 ./plot_all_figures.sh
@@ -167,7 +167,7 @@ Install Python dependencies, download required traces, generate ChampSim configu
   ./run_fig7.sh
   ```
 
-#### Performance Evaluation: Figure 9-12
+#### Performance Evaluation: Figure 10-14
 **Set Required Library Path:**
 ```bash
 cd TPRAC/
@@ -180,49 +180,58 @@ source setup_lib_path.sh
 
 
 ##### Using Slurm
-- **Figure 9: Main Performance Result**:
+- **Figure 10: Main Performance Result**:
   ```bash
   cd TPRAC/
-  ./run_slurm_fig9.sh
+  ./run_slurm_fig10.sh
   ```
-- **Figure 10: Sensitivity to PRAC Levels (Number of RFMs per ABO)**:
-  ```bash
-  cd TPRAC/
-  bash run_slurm_fig10.sh
-  ```
-- **Figure 11: Sensitivity to Targeted Refreshes**:
+- **Figure 11: Sensitivity to PRAC Levels (Number of RFMs per ABO)**:
   ```bash
   cd TPRAC/
   bash run_slurm_fig11.sh
   ```
-- **Figure 12: Sensitivity to Rowhammer Threshold**:
+- **Figure 12: Sensitivity to Targeted Refreshes**:
   ```bash
   cd TPRAC/
   bash run_slurm_fig12.sh
   ```
-
-##### Using a Personal Server
-- **Figure 9: Main Performance Result**:
+- **Figure 13: Sensitivity to RowHammer Threshold**:
   ```bash
   cd TPRAC/
-  ./run_ps_fig9.sh
+  bash run_slurm_fig13.sh
   ```
-- **Figure 10: Sensitivity to PRAC Levels (Number of RFMs per ABO)**:
+- **Figure 14: Sensitivity to Activation Counter Reset**:
+  ```bash
+  cd TPRAC/
+  bash run_slurm_fig14.sh
+  ```
+
+##### Using a Personal Server
+- **Figure 10: Main Performance Result**:
   ```bash
   cd TPRAC/
   ./run_ps_fig10.sh
   ```
-- **Figure 11: Sensitivity to Targeted Refreshes**:
+- **Figure 11: Sensitivity to PRAC Levels (Number of RFMs per ABO)**:
   ```bash
   cd TPRAC/
   ./run_ps_fig11.sh
   ```
-- **Figure 12: Sensitivity to Rowhammer Threshold**:
+- **Figure 12: Sensitivity to Targeted Refreshes**:
   ```bash
   cd TPRAC/
   ./run_ps_fig12.sh
   ```
-
+- **Figure 13: Sensitivity to RowHammer Threshold**:
+  ```bash
+  cd TPRAC/
+  ./run_ps_fig13.sh
+  ```
+- **Figure 14: Sensitivity to Activation Counter Reset**:
+  ```bash
+  cd TPRAC/
+  bash run_ps_fig14.sh
+  ```
 #### Collate Results
 Once simulations complete, generate results (CSV files) using the commands below. Generated csv files can be found in `TPRAC/results/csvs/`.
 - **Figure 7: MAX ACTs to a Row as TB-Window Varies (Security Analysis)**:
@@ -230,25 +239,30 @@ Once simulations complete, generate results (CSV files) using the commands below
   cd TPRAC/plot_scripts
   python3 generate_csv_fig7.py
   ```
-- **Figure 9: Main Results**:
-  ```bash
-  cd TPRAC/plot_scripts
-  python3 generate_csv_fig9.py
-  ```
-- **Figure 10: Sensitivity to PRAC Levels (Number of RFMs per ABO)**:
+- **Figure 10: Main Results**:
   ```bash
   cd TPRAC/plot_scripts
   python3 generate_csv_fig10.py
   ```
-- **Figure 11: Sensitivity to Targeted Refreshes**:
+- **Figure 11: Sensitivity to PRAC Levels (Number of RFMs per ABO)**:
   ```bash
   cd TPRAC/plot_scripts
   python3 generate_csv_fig11.py
   ```
-- **Figure 12: Sensitivity to Rowhammer Threshold**:
+- **Figure 12: Sensitivity to Targeted Refreshes**:
   ```bash
   cd TPRAC/plot_scripts
   python3 generate_csv_fig12.py
+  ```
+- **Figure 13: Sensitivity to RowHammer Threshold**:
+  ```bash
+  cd TPRAC/plot_scripts
+  python3 generate_csv_fig13.py
+  ```
+- **Figure 14: Sensitivity to Activation Counter Reset**:
+  ```bash
+  cd TPRAC/plot_scripts
+  python3 generate_csv_fig14.py
   ```
 
 #### Generate Plots
@@ -258,23 +272,28 @@ After collating results, generate the plots using the commands below. Alternativ
   cd TPRAC/plot_scripts
   python3 plot_fig7.py
   ```
-- **Figure 9: Main Results**:
-  ```bash
-  cd TPRAC/plot_scripts
-  python3 plot_fig9.py
-  ```
-- **Figure 10: Sensitivity to PRAC Levels (Number of RFMs per ABO)**:
+- **Figure 10: Main Results**:
   ```bash
   cd TPRAC/plot_scripts
   python3 plot_fig10.py
   ```
-- **Figure 11: Sensitivity to Targeted Refreshes**:
-  ```bash  
+- **Figure 11: Sensitivity to PRAC Levels (Number of RFMs per ABO)**:
+  ```bash
   cd TPRAC/plot_scripts
   python3 plot_fig11.py
   ```
-- **Figure 12: Sensitivity to Rowhammer Threshold**:
-  ```bash
+- **Figure 12: Sensitivity to Targeted Refreshes**:
+  ```bash  
   cd TPRAC/plot_scripts
   python3 plot_fig12.py
+  ```
+- **Figure 13: Sensitivity to RowHammer Threshold**:
+  ```bash
+  cd TPRAC/plot_scripts
+  python3 plot_fig13.py
+  ```
+- **Figure 14: Sensitivity to Activation Counter Reset**:
+  ```bash
+  cd TPRAC/plot_scripts
+  python3 plot_fig14.py
   ```

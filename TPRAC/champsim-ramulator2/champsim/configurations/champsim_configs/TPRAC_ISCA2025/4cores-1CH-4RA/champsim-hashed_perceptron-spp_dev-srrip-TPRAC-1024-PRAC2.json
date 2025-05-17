@@ -150,7 +150,7 @@
     },
     "physical_memory": {
         "frequency": 4000,
-        "config_path": "/scratch/st-prashnr-1/jeonghyun/AE/PRAC_TC_ISCA25/TPRAC/champsim-ramulator2/champsim/configurations/ramulator2_configs/TPRAC_ISCA2025/1CH_4RA_DDR5_32Gb_8000-TPRAC-1024-PRAC2.yaml",
+        "config_path": "/scratch/st-prashnr-1/jeonghyun/AE/latest/PRAC_TC_ISCA25/TPRAC/champsim-ramulator2/champsim/configurations/ramulator2_configs/TPRAC_ISCA2025/1CH_4RA_DDR5_32Gb_8000-TPRAC-1024-PRAC2.yaml",
         "rq_size": 64,
         "wq_size": 64
     },

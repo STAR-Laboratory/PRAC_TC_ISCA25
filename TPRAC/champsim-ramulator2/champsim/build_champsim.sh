@@ -14,7 +14,7 @@ CHAMPSIM_DIR="$SCRIPT_DIR"
 # Extract binary name: just the filename without .json
 BINARY_NAME="$(basename "$CONFIG_FILE" .json)"
 
-# Check if binary already exists
+#### NOTE: We currently skip recompilation of binaries if they already exist.
 if [ -f "$CHAMPSIM_DIR/bin/4cores-1CH-4RA/$BINARY_NAME" ]; then
     echo "[SKIP] Binary already exists: $BINARY_NAME"
     exit 0

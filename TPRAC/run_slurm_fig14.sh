@@ -22,10 +22,10 @@ python3 "$PWD/sim_scripts/setup_slurm.py" \
     --partition_name "$SLURM_PART_NAME" \
     --partition_default_memory "$SLURM_PART_DEF_MEM" \
     --trace_list "$PWD/trace_lists/4core_traces.txt" \
-    -rc "run_config_fig9"
+    -rc "run_config_fig14"
 
-echo "[INFO] Starting ChampSim simulations for Figure 9"
-python3 "$PWD/sim_scripts/execute_run_script.py" -rc "run_config_fig9" --slurm
+echo "[INFO] Starting ChampSim simulations for Figure 14"
+python3 "$PWD/sim_scripts/execute_run_script.py" -rc "run_config_fig14" --slurm
 
-echo "[INFO] Fired all simulations for Figure 9: This can take ~20 hours"
+echo "[INFO] Fired all simulations for Figure 14: This can take ~20 hours"
 rm "$PWD/run.sh" 

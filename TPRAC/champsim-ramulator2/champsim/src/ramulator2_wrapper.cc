@@ -23,15 +23,8 @@ champsim::operable(clock_period),queues(std::move(ul)), clock_period(clock_perio
     num_mem_channels = config["MemorySystem"]["DRAM"]["org"]["channel"].as<int>();
     std::cout<<"Ramulator2 is Connected"<<std::endl;
     RQ.resize(rq_size * num_mem_channels);
-    WQ.resize(wq_size * num_mem_channels);
-    // Print the sizes of RQ and WQ for debugging
-    fmt::print("[Debug] RQ Size: {}\n", RQ.size());
-    fmt::print("[Debug] WQ Size: {}\n", WQ.size());
+    fmt::print("RQ Size: {}\n", RQ.size());
     initialize(config);
-    // registerExitCallback([this]() {
-    //     ramulator2_frontend->finalize();
-    //     ramulator2_memorysystem->finalize();
-    // });
 }
 
 Ramulator2DRAM::~Ramulator2DRAM() {
@@ -43,7 +36,6 @@ void Ramulator2DRAM::initialize(YAML::Node config)
     using namespace champsim::data::data_literals;
     using namespace std::literals::chrono_literals;
 
-    // YAML::Node config = Ramulator::Config::parse_config_file(config_path, {});
     YAML::Node dram_config = config["MemorySystem"]["DRAM"];
 
 
@@ -144,7 +136,7 @@ bool Ramulator2DRAM::add_rq(const champsim::channel::request_type& packet, champ
 }
 
 bool Ramulator2DRAM::add_wq(const champsim::channel::request_type& packet){
-    // fmt::print("[WTQ] {} address: {} v_address: {} pf_metadata: {} current: {}\n", 
+    // fmt::print("[WRITE] {} address: 0x{:x} v_address: 0x{:x} pf_metadata: {} current: {}\n", 
     //     __func__, 
     //     packet.address.to<uint64_t>(),    // Convert address to uint64_t
     //     packet.v_address.to<uint64_t>(),  // Convert v_address to uint64_t
@@ -152,27 +144,16 @@ bool Ramulator2DRAM::add_wq(const champsim::channel::request_type& packet){
     //     (current_time.time_since_epoch()) / clock_period // Convert to seconds since epoch
     // );
     
-    // 1. Check if there is an empty entry in queue
-    auto wq_it = std::find_if_not(std::begin(WQ), std::end(WQ), [](const auto& pkt) { return pkt.has_value(); });
-
-    if (wq_it == std::end(WQ)) {
-        // fmt::print("[WTQ] WQ is FULL!\n");
-        return false;
-    }
-
-    // 2. Check if Ramulator2 can accept the request
+    // 1. Check if Ramulator2 can accept the request
     bool enqueue_success = ramulator2_frontend->receive_external_requests(
             1, static_cast<long>(packet.address.to<long>()), 0, [this](Ramulator::Request& req) {
                 // process_write_response(req.addr);
             });
 
     if (!enqueue_success){
-        // fmt::print("[WTQ] Ramulator2 cannot accept requests!\n");
+        // fmt::print("[WRITE] Ramulator2 cannot accept requests!\n");
         return false;
     }
-    // 3. Insert request
-    // **wq_it = request_type{packet};
-    // fmt::print("[WTQ] Send Request to Ramulator2!\n");
 
     return true;
 }
@@ -248,7 +229,14 @@ void Ramulator2DRAM::process_response(uint64_t addr) {
         if (it->has_value() && it->value().address.to<uint64_t>() == addr) {
             auto& entry = it->value();
 
-            response_type response{entry.address, entry.v_address, entry.data, entry.pf_metadata, entry.instr_depend_on_me};
+            response_type response{
+                entry.address,
+                entry.v_address,
+                entry.data,
+                entry.pf_metadata,
+                entry.instr_depend_on_me
+            };
+
             for (auto* ret : entry.to_return) {
                 // fmt::print("[DEBUG] Sending response to LLC -> addr: {} v_addr: {} current: {}\n",
                     // response.address.to<uint64_t>(), response.v_address.to<uint64_t>(),
@@ -263,25 +251,6 @@ void Ramulator2DRAM::process_response(uint64_t addr) {
     }
 }
 
-// void Ramulator2DRAM::process_write_response(uint64_t addr) {
-//     fmt::print("[DEBUG] Receive Write Request from Ramulator2 -> addr: {} current: {}\n", 
-//         addr, (current_time.time_since_epoch()) / clock_period);
-//     for (auto it = WQ.begin(); it != WQ.end(); ++it) {
-
-//         if (it->has_value() && it->value().address.to<uint64_t>() == addr) {
-//             auto& entry = it->value();
-
-//             fmt::print("[DEBUG] Processing Write Request -> addr: {} v_addr: {} current: {}\n",
-//                 entry.address.to<uint64_t>(), entry.v_address.to<uint64_t>(),
-//                 (current_time.time_since_epoch()) / clock_period);
-
-//             // Remove from WQ since it's completed
-//             it->reset();
-//             return;
-//         }
-//     }
-// }
-
 long Ramulator2DRAM::operate() {
     long progress = 0;
     // fmt::print("Ticking Check: \n");
@@ -290,31 +259,6 @@ long Ramulator2DRAM::operate() {
     initiate_requests();
     check_read_collision();
 
-    // Process completed read requests
-    // while (!CRQ.empty()) {
-    //     auto& entry = CRQ.front();
-     
-    //     response_type response{entry.address, entry.v_address, entry.data, entry.pf_metadata, entry.instr_depend_on_me};
-    //     for (auto* ret : entry.to_return) {
-    //         // fmt::print("[DEBUG] Sending response to LLC -> addr: {} v_addr: {} current: {}\n",
-    //             // response.address.to<uint64_t>(), response.v_address.to<uint64_t>(),
-    //             // (current_time.time_since_epoch()) / clock_period);
-    //         ret->push_back(response);
-    //     }
-    //     // fmt::print("Complete read: {} current: {}\n", entry.address.to<uint64_t>(), (current_time.time_since_epoch()) / clock_period);
-    //     ++progress; 
-    //     CRQ.pop_front();
-    // }
-    // for (auto& entry : WQ) {
-    //     if (entry.has_value()) {
-    //         ++progress;
-    //         // fmt::print("Complete write: {}\n", &entry.address.to<uint64_t>());
-    //     }
-
-    //     entry.reset();
-    // }
-    // fmt::print("Progress: {}\n", progress);
-    //return progress;
     return 1;
 }
 

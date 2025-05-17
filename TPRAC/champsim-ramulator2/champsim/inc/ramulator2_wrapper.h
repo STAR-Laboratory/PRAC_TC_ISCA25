@@ -21,7 +21,7 @@
 #include "memory_system/memory_system.h"
 
 //****************Wrapper of Ramulator2********************//
-//We connect ChampSim and Ramulator2 using Response Queue structure (RQ and WQ)
+//We connect ChampSim and Ramulator2 using Response Queue structure (RQ)
 //It triggers callback to LLC whenever the memory reqeusts are completed in ramulator2
 class Ramulator2DRAM: public champsim::operable {
 public:
@@ -49,7 +49,6 @@ public:
     using value_type = request_type;
     using queue_type = std::vector<std::optional<value_type>>;
     queue_type RQ; //READ Queue
-    queue_type WQ; //WRITE Queue
   
     using channel_type = champsim::channel;
     std::vector<channel_type*> queues;
@@ -66,7 +65,6 @@ public:
     long operate() final;
     void finalize();
     void process_response(uint64_t addr);
-    // void process_write_response(uint64_t addr);
     
     explicit Ramulator2DRAM(champsim::chrono::picoseconds clock_period, const std::string& config_path, std::vector<channel_type*>&& ul, std::size_t rq_size, std::size_t wq_size);
     [[nodiscard]] champsim::data::bytes size() const;
@@ -74,7 +72,6 @@ public:
 private:
     int num_mem_channels;
     std::size_t total_dram_size;
-    // std::deque<request_type> CRQ;  // Completed Read Queue
     std::unique_ptr<Ramulator::IFrontEnd> ramulator2_frontend;
     std::unique_ptr<Ramulator::IMemorySystem> ramulator2_memorysystem;
     champsim::chrono::picoseconds clock_period{};

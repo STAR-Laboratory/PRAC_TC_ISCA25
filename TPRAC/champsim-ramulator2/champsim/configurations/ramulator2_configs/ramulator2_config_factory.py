@@ -207,6 +207,98 @@ def ModifyandSaveConfig(config, mitigation, NRH, PRAC_level):
             }
         })
 
+    elif mitigation == "TPRAC-NoReset":
+        NBO = get_abo_only_parameters(NRH)
+        TB_RFM_window = get_tprac_noreset_parameters(NRH)
+        config['MemorySystem'][CONTROLLER]['plugins'].append({
+            'ControllerPlugin' : {
+                'impl': 'QPRAC',
+                'abo_delay_acts': PRAC_level,
+                'abo_recovery_refs': PRAC_level,
+                'abo_act_ns': 180,
+                'abo_threshold': NBO,
+                'psq_size': 5,
+                'targeted_ref_frequency': 0,
+                'enable_opportunistic_mitigation': True
+            }
+        })
+        config['MemorySystem'][CONTROLLER]['plugins'].append({
+            'ControllerPlugin' : {
+                'impl': 'TimingBasedRFM',
+                'TB_RFM_window': TB_RFM_window,
+                'rfm_type': 0
+            }
+        })
+    elif mitigation == "TPRAC-NoReset-TREFpertREFI":
+        NBO = get_abo_only_parameters(NRH)
+        TB_RFM_window = get_tprac_noreset_parameters(NRH)
+        config['MemorySystem'][CONTROLLER]['plugins'].append({
+            'ControllerPlugin' : {
+                'impl': 'QPRAC',
+                'abo_delay_acts': PRAC_level,
+                'abo_recovery_refs': PRAC_level,
+                'abo_act_ns': 180,
+                'abo_threshold': NBO,
+                'psq_size': 5,
+                'targeted_ref_frequency': 1,
+                'enable_opportunistic_mitigation': True
+            }
+        })
+        config['MemorySystem'][CONTROLLER]['plugins'].append({
+            'ControllerPlugin' : {
+                'impl': 'TimingBasedRFM',
+                'TB_RFM_window': TB_RFM_window,
+                'rfm_type': 0,
+                'targeted_ref_ratio': 1
+            }
+        })
+    elif mitigation == "TPRAC-NoReset-TREFper2tREFI":
+        NBO = get_abo_only_parameters(NRH)
+        TB_RFM_window = get_tprac_noreset_parameters(NRH)
+        config['MemorySystem'][CONTROLLER]['plugins'].append({
+            'ControllerPlugin' : {
+                'impl': 'QPRAC',
+                'abo_delay_acts': PRAC_level,
+                'abo_recovery_refs': PRAC_level,
+                'abo_act_ns': 180,
+                'abo_threshold': NBO,
+                'psq_size': 5,
+                'targeted_ref_frequency': 2,
+                'enable_opportunistic_mitigation': True
+            }
+        })
+        config['MemorySystem'][CONTROLLER]['plugins'].append({
+            'ControllerPlugin' : {
+                'impl': 'TimingBasedRFM',
+                'TB_RFM_window': TB_RFM_window,
+                'rfm_type': 0,
+                'targeted_ref_ratio': 2
+            }
+        })
+    elif mitigation == "TPRAC-NoReset-TREFper4tREFI":
+        NBO = get_abo_only_parameters(NRH)
+        TB_RFM_window = get_tprac_noreset_parameters(NRH)
+        config['MemorySystem'][CONTROLLER]['plugins'].append({
+            'ControllerPlugin' : {
+                'impl': 'QPRAC',
+                'abo_delay_acts': PRAC_level,
+                'abo_recovery_refs': PRAC_level,
+                'abo_act_ns': 180,
+                'abo_threshold': NBO,
+                'psq_size': 5,
+                'targeted_ref_frequency': 4,
+                'enable_opportunistic_mitigation': True
+            }
+        })
+        config['MemorySystem'][CONTROLLER]['plugins'].append({
+            'ControllerPlugin' : {
+                'impl': 'TimingBasedRFM',
+                'TB_RFM_window': TB_RFM_window,
+                'rfm_type': 0,
+                'targeted_ref_ratio': 4
+            }
+        })
+
     ramulator2_config_name_base = f"{dram_base_info}"
     if mitigation == "Baseline":
         ramulator2_config_name = f"{ramulator2_config_name_base}-{mitigation}"
@@ -225,7 +317,8 @@ if __name__ == "__main__":
     os.makedirs(ramulator2_config_dir, exist_ok=True)
     ## 2. Set required parameters: Ex) RowHammer thresholds, mitigation lists
     # mitigation_lists = ['Baseline', 'ABO_Only', 'ABO_RFM', 'TPRAC']
-    mitigation_lists = ['TPRAC-TREFper4tREFI', 'TPRAC-TREFper3tREFI', 'TPRAC-TREFper2tREFI', 'TPRAC-TREFpertREFI']
+    # mitigation_lists = ['TPRAC-TREFper4tREFI', 'TPRAC-TREFper3tREFI', 'TPRAC-TREFper2tREFI', 'TPRAC-TREFpertREFI']
+    mitigation_lists = ['TPRAC-NoReset', 'TPRAC-NoReset-TREFper4tREFI', 'TPRAC-NoReset-TREFper2tREFI', 'TPRAC-NoReset-TREFpertREFI']
     NRH_lists = [128, 256, 512, 1024, 2048, 4096]
     # PRAC_level_lists = [1, 2, 4]    
     PRAC_level_lists = [1]    
