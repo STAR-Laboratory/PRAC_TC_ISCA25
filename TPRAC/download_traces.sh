@@ -41,6 +41,7 @@ FILES=(
 482.sphinx3-1100B.champsimtrace.xz
 483.xalancbmk-127B.champsimtrace.xz
 600.perlbench_s-1273B.champsimtrace.xz
+602.gcc_s-1850B.champsimtrace.xz
 603.bwaves_s-1080B.champsimtrace.xz
 605.mcf_s-1152B.champsimtrace.xz
 607.cactuBSSN_s-2421B.champsimtrace.xz
