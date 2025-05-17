@@ -110,7 +110,7 @@ Configure the following parameter in `./TPRAC/run_artifact.sh` or `run_ps_fig*.s
 
 #### 4. Run the Artifact
 Run the following commands to install dependencies, download traces, generate ChampSim configurations, build ChampSim and Ramulator2, and execute simulations.
-> **Note:**  Running all experiments on a personal server may take significant time (almost a week). Thus, if using a personal server, we highly recommend first running the security analysis (Figure 7) and main performance experiment (Figure 10) and reviewing the results before proceeding with the full set of experiments (Figure 7 and Figure 10-13).
+> **Note:**  Running all experiments on a personal server may take significant time (almost a week). Thus, if using a personal server, we highly recommend first running the security analysis (Figure 7) and main performance experiment (Figure 10) and reviewing the results before proceeding with the full set of experiments (Figure 7 and Figure 10-14).
 
 ##### Security Analysis (Figure 7) and Main Performance Experiment (Figure 10)
 - **Using Slurm**: Faster (~20 hours on a cluster with 500+ cores).
